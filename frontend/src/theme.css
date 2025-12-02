@@ -1,0 +1,95 @@
+/* Minimal modern theme inspired by clean UI kits */
+.root-placeholder {}
+:root {
+  --primary: #0ea5a4; /* teal */
+  --accent: #ff6b6b; /* soft coral */
+  --muted: #6b7280;
+  --bg: #fbfcfe;
+}
+body {
+  background: var(--bg);
+  font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  color: #0f172a;
+}
+.landing-hero {
+  background: linear-gradient(180deg, rgba(14,165,164,0.12), rgba(255,255,255,0));
+  color: #072a27;
+  padding: 5.5rem 0 2.5rem;
+}
+.hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.card {
+  border-radius: 14px;
+}
+.card .card-body {
+  padding: 1.25rem;
+}
+.app-footer {
+  background: #fff;
+  border-top: 1px solid #eef2f7;
+}
+.app-footer small {
+  color: var(--muted);
+}
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(14,165,164,0.12);
+}
+.table-hover tbody tr:hover {
+  background: #f1f5f9;
+}
+.navbar-brand {
+  font-weight: 700;
+}
+
+/* Navbar tweaks */
+.navbar {
+  padding: 0.6rem 1rem;
+}
+
+/* Hero */
+.hero-inner .lead {
+  opacity: 0.95;
+}
+
+/* Cards */
+.card {
+  border: none;
+}
+
+/* Footer */
+.app-footer small {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Feature card stretch */
+.feature-card { min-height: 220px; display:flex; flex-direction:column; justify-content:space-between }
+
+/* Navbar custom */
+.navbar-custom { background: #ffffff; border-bottom: 1px solid rgba(15,23,42,0.04); box-shadow: 0 1px 0 rgba(15,23,42,0.02); }
+.navbar-custom .navbar-brand { color: var(--primary); font-weight:700 }
+.navbar-custom .btn-light { background: #fff; border: 1px solid rgba(15,23,42,0.06); }
+
+/* Small helpers */
+.text-accent { color: var(--accent); }
+.muted { color: var(--muted); }
+
+/* Forms */
+.form-floating > .form-control {
+  height: calc(3rem + 2px);
+}
+
+/* Search */
+.search-input {
+  max-width: 420px;
+}
+
+/* Utilities */
+.muted {
+  color: var(--muted);
+}
