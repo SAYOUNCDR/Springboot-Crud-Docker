@@ -25,55 +25,68 @@ export default function AddUser() {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-6 offset-md-3 p-4 mt-4">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h2 className="text-center mb-4">Register User</h2>
-
+      <div className="row justify-content-center mt-5">
+        <div className="col-md-5">
+          <div className="card shadow-sm border-0">
+            <div className="card-header bg-white pt-4 pb-0 border-0">
+              <h4 className="card-title fw-bold mb-1">Create an account</h4>
+              <p className="text-muted small">
+                Enter user details below to create a new account.
+              </p>
+            </div>
+            <div className="card-body pt-3">
               <form onSubmit={(e) => onSubmit(e)}>
-                <div className="form-floating mb-3">
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    Full Name
+                  </label>
                   <input
                     id="name"
                     type="text"
                     className="form-control"
-                    placeholder="Name"
+                    placeholder="John Doe"
                     name="name"
                     value={name}
                     onChange={(e) => onInputChange(e)}
+                    required
                   />
-                  <label htmlFor="name">Name</label>
                 </div>
 
-                <div className="form-floating mb-3">
+                <div className="mb-3">
+                  <label htmlFor="username" className="form-label">
+                    Username
+                  </label>
                   <input
                     id="username"
                     type="text"
                     className="form-control"
-                    placeholder="Username"
+                    placeholder="johndoe"
                     name="username"
                     value={username}
                     onChange={(e) => onInputChange(e)}
+                    required
                   />
-                  <label htmlFor="username">Username</label>
                 </div>
 
-                <div className="form-floating mb-3">
+                <div className="mb-4">
+                  <label htmlFor="email" className="form-label">
+                    Email Address
+                  </label>
                   <input
                     id="email"
                     type="email"
                     className="form-control"
-                    placeholder="E-mail"
+                    placeholder="name@example.com"
                     name="email"
                     value={email}
                     onChange={(e) => onInputChange(e)}
+                    required
                   />
-                  <label htmlFor="email">E-mail</label>
                 </div>
 
-                <div className="d-flex justify-content-between">
+                <div className="d-grid gap-2">
                   <button type="submit" className="btn btn-primary">
-                    Submit
+                    Create Account
                   </button>
                   <Link className="btn btn-outline-secondary" to="/home">
                     Cancel

@@ -26,7 +26,7 @@ export default function EditUser() {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`http://localhost:8080/user/${id}`, user);
-    navigate("/");
+    navigate("/home");
   };
 
   const loadUser = async () => {
@@ -36,14 +36,21 @@ export default function EditUser() {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-6 offset-md-3 p-4 mt-4">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <h2 className="text-center mb-4">Edit User</h2>
-
+      <div className="row justify-content-center mt-5">
+        <div className="col-md-5">
+          <div className="card shadow-sm border-0">
+            <div className="card-header bg-white pt-4 pb-0 border-0">
+              <h4 className="card-title fw-bold mb-1">Edit User</h4>
+              <p className="text-muted small">
+                Update the user's information below.
+              </p>
+            </div>
+            <div className="card-body pt-3">
               <form onSubmit={(e) => onSubmit(e)}>
-                <div className="form-floating mb-3">
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    Full Name
+                  </label>
                   <input
                     id="name"
                     type="text"
@@ -53,10 +60,12 @@ export default function EditUser() {
                     value={name}
                     onChange={(e) => onInputChange(e)}
                   />
-                  <label htmlFor="name">Name</label>
                 </div>
 
-                <div className="form-floating mb-3">
+                <div className="mb-3">
+                  <label htmlFor="username" className="form-label">
+                    Username
+                  </label>
                   <input
                     id="username"
                     type="text"
@@ -66,10 +75,12 @@ export default function EditUser() {
                     value={username}
                     onChange={(e) => onInputChange(e)}
                   />
-                  <label htmlFor="username">Username</label>
                 </div>
 
-                <div className="form-floating mb-3">
+                <div className="mb-4">
+                  <label htmlFor="email" className="form-label">
+                    Email Address
+                  </label>
                   <input
                     id="email"
                     type="email"
@@ -79,12 +90,11 @@ export default function EditUser() {
                     value={email}
                     onChange={(e) => onInputChange(e)}
                   />
-                  <label htmlFor="email">E-mail</label>
                 </div>
 
-                <div className="d-flex justify-content-between">
+                <div className="d-grid gap-2">
                   <button type="submit" className="btn btn-primary">
-                    Update
+                    Save Changes
                   </button>
                   <Link className="btn btn-outline-secondary" to="/home">
                     Cancel

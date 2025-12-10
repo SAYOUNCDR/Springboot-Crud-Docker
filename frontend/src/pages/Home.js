@@ -18,8 +18,10 @@ export default function Home() {
   };
 
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/user/${id}`);
-    loadUsers();
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      await axios.delete(`http://localhost:8080/user/${id}`);
+      loadUsers();
+    }
   };
 
   const filtered = users.filter((u) => {
@@ -34,74 +36,86 @@ export default function Home() {
 
   return (
     <div className="container">
-      <div className="py-4">
-        <div className="card shadow-sm">
-          <div className="card-body">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <h3 className="card-title mb-0">Users</h3>
-              <div className="d-flex gap-2 align-items-center">
+      <div className="py-5">
+        <div className="card shadow-sm border-0">
+          <div className="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h4 className="card-title mb-0 fw-bold">Users Directory</h4>
+            <div
+              className="d-flex gap-2 align-items-center"
+              style={{ maxWidth: "400px", width: "100%" }}
+            >
+              <div className="input-group">
+                <span className="input-group-text bg-transparent border-end-0">
+                  <i className="bi bi-search text-muted"></i>
+                </span>
                 <input
-                  className="form-control form-control-sm search-input"
-                  placeholder="Search by name, username or email"
+                  className="form-control border-start-0 ps-0"
+                  placeholder="Search users..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
-                <button
-                  className="btn btn-outline-secondary btn-sm"
-                  onClick={() => setQuery("")}
-                >
-                  Clear
-                </button>
               </div>
             </div>
+          </div>
+          <div className="card-body p-0">
             <div className="table-responsive">
-              <table className="table table-hover">
-                <thead>
+              <table className="table table-hover mb-0 align-middle">
+                <thead className="bg-light">
                   <tr>
-                    <th scope="col">S.N</th>
+                    <th scope="col" className="ps-4">
+                      #
+                    </th>
                     <th scope="col">Name</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" className="text-end pe-4">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user, index) => (
+                  {filtered.map((user, index) => (
                     <tr key={index}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{user.name}</td>
+                      <th scope="row" className="ps-4 text-muted fw-normal">
+                        {index + 1}
+                      </th>
+                      <td className="fw-medium">{user.name}</td>
                       <td>{user.username}</td>
-                      <td>{user.email}</td>
-                      <td>
-                        <Link
-                          className="btn btn-sm btn-primary mx-1"
-                          to={`/viewuser/${user.id}`}
-                        >
-                          View
-                        </Link>
-                        <Link
-                          className="btn btn-sm btn-outline-primary mx-1"
-                          to={`/edituser/${user.id}`}
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          className="btn btn-sm btn-danger mx-1"
-                          onClick={() => deleteUser(user.id)}
-                        >
-                          Delete
-                        </button>
+                      <td className="text-muted">{user.email}</td>
+                      <td className="text-end pe-4">
+                        <div className="d-flex justify-content-end gap-2">
+                          <Link
+                            className="btn btn-sm btn-outline-secondary"
+                            to={`/viewuser/${user.id}`}
+                          >
+                            View
+                          </Link>
+                          <Link
+                            className="btn btn-sm btn-outline-primary"
+                            to={`/edituser/${user.id}`}
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            className="btn btn-sm btn-danger"
+                            onClick={() => deleteUser(user.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
+                  {filtered.length === 0 && (
+                    <tr>
+                      <td colSpan="5" className="text-center py-5 text-muted">
+                        No users found matching "{query}"
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
-            {filtered.length === 0 && (
-              <div className="text-center p-4 muted">
-                No users found. Try adding one.
-              </div>
-            )}
           </div>
         </div>
       </div>
