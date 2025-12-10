@@ -1,7 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-custom">
@@ -28,12 +36,28 @@ export default function Navbar() {
           </button>
 
           <div className="d-flex gap-2">
-            <Link className="btn btn-outline-secondary" to="/home">
-              <i className="bi bi-list-ul me-1"></i> Users
-            </Link>
-            <Link className="btn btn-primary text-white" to="/adduser">
-              <i className="bi bi-plus-lg me-1"></i> Add
-            </Link>
+            {token ? (
+              <>
+                <Link className="btn btn-outline-secondary" to="/home">
+                  <i className="bi bi-list-ul me-1"></i> Users
+                </Link>
+                <Link className="btn btn-primary text-white" to="/adduser">
+                  <i className="bi bi-plus-lg me-1"></i> Add
+                </Link>
+                <button className="btn btn-danger" onClick={handleLogout}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link className="btn btn-outline-primary" to="/login">
+                  Login
+                </Link>
+                <Link className="btn btn-primary" to="/register">
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
